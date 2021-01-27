@@ -9,10 +9,5 @@ edition = "2018"
 [dependencies]
 bevy = "0.4"
 
-[dev-dependencies]
-bevy_fly_camera = "0.6"
-
-
 [patch.crates-io]
-bevy = { path = "../bevy" }
-bevy_fly_camera = { path = "../bevy_fly_camera" }
+bevy = { git = "https://github.com/Neo-Zhixing/bevy.git", branch = "camera_transform_matrix" }

@@ -1,11 +1,9 @@
 use bevy::prelude::*;
-use bevy_fly_camera::{FlyCamera, FlyCameraPlugin};
 use bevy_sky::SkyPlugin;
 
 fn main() {
     App::build()
         .add_plugins(DefaultPlugins)
-        .add_plugin(FlyCameraPlugin)
         .add_plugin(SkyPlugin)
         .add_startup_system(setup.system())
         .run();
@@ -39,9 +37,8 @@ fn setup(
         })
         // camera
         .spawn(Camera3dBundle {
-            transform: Transform::from_xyz(-2.0, 2.5, 5.0)
+            transform: Transform::from_xyz(-10.0, 1.5, 3.0)
                 .looking_at(Vec3::default(), Vec3::unit_y()),
             ..Default::default()
-        })
-        .with(FlyCamera::default());
+        });
 }
