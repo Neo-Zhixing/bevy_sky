@@ -1,12 +1,21 @@
 use bevy::prelude::*;
 
+use crate::Sky;
 use bevy::core::AsBytes;
 use bevy::reflect::TypeUuid;
 use bevy::render::mesh::{INDEX_BUFFER_ASSET_INDEX, VERTEX_ATTRIBUTE_BUFFER_ID};
 use bevy::render::pass::{
     LoadOp, Operations, PassDescriptor, RenderPassColorAttachmentDescriptor, TextureAttachment,
 };
-use bevy::render::pipeline::{BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendDescriptor, BlendFactor, BlendOperation, ColorStateDescriptor, ColorWrite, CompareFunction, CullMode, DepthStencilStateDescriptor, FrontFace, IndexFormat, InputStepMode, PipelineDescriptor, PipelineLayout, PrimitiveTopology, RasterizationStateDescriptor, RenderPipeline, StencilStateDescriptor, StencilStateFaceDescriptor, UniformProperty, VertexAttributeDescriptor, VertexBufferDescriptor, VertexFormat, PolygonMode, PushConstantRange};
+use bevy::render::pipeline::{
+    BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendDescriptor,
+    BlendFactor, BlendOperation, ColorStateDescriptor, ColorWrite, CompareFunction, CullMode,
+    DepthStencilStateDescriptor, FrontFace, IndexFormat, InputStepMode, PipelineDescriptor,
+    PipelineLayout, PolygonMode, PrimitiveTopology, PushConstantRange,
+    RasterizationStateDescriptor, RenderPipeline, StencilStateDescriptor,
+    StencilStateFaceDescriptor, UniformProperty, VertexAttributeDescriptor, VertexBufferDescriptor,
+    VertexFormat,
+};
 use bevy::render::render_graph::{
     base, Node, RenderGraph, RenderResourcesNode, ResourceSlotInfo, ResourceSlots, SlotLabel,
     WindowSwapChainNode, WindowTextureNode,
@@ -18,7 +27,6 @@ use bevy::render::renderer::{
 };
 use bevy::render::shader::{ShaderStage, ShaderStages};
 use bevy::render::texture::TextureFormat;
-use crate::Sky;
 
 pub const SKY_PIPELINE_HANDLE: HandleUntyped =
     HandleUntyped::weak_from_u64(PipelineDescriptor::TYPE_UUID, 0x5188c0693b407dd8);
@@ -28,7 +36,6 @@ pub const SKY_MESH_HANDLE: HandleUntyped =
 pub mod node {
     pub const SKY_PASS: &str = "sky_node";
 }
-
 
 #[derive(Debug)]
 struct SkyNode {
@@ -130,11 +137,7 @@ impl Node for SkyNode {
                 );
                 render_pass.set_vertex_buffer(0, vertex_buffer_id, 0);
                 render_pass.set_index_buffer(index_buffer_id, 0, IndexFormat::Uint16);
-                render_pass.set_push_constants(
-                    BindingShaderStage::FRAGMENT,
-                    0,
-                    sky.as_bytes(),
-                );
+                render_pass.set_push_constants(BindingShaderStage::FRAGMENT, 0, sky.as_bytes());
                 render_pass.draw_indexed(0..14, 0, 0..1);
             },
         )
@@ -157,7 +160,7 @@ pub(crate) fn setup(
         [-100., 100.0, 100.0], // 3
         [100.0, -100., -100.], // 4
         [100.0, -100., 100.0], // 5
-        [100.0, 100.0, -10.], // 6
+        [100.0, 100.0, -10.],  // 6
         [100.0, 100.0, 100.0], // 7
     ];
     let mesh_handle: Handle<Mesh> = SKY_MESH_HANDLE.typed();
@@ -215,23 +218,25 @@ pub(crate) fn setup(
                         shader_location: 0,
                     }],
                 }],
-                push_constant_ranges: vec![
-                    PushConstantRange {
-                        stages: BindingShaderStage::FRAGMENT,
-                        range: 0..(std::mem::size_of::<Sky>() as u32)
-                    }
-                ]
+                push_constant_ranges: vec![PushConstantRange {
+                    stages: BindingShaderStage::FRAGMENT,
+                    range: 0..(std::mem::size_of::<Sky>() as u32),
+                }],
             }),
             shader_stages: ShaderStages {
-                vertex: shaders.add(Shader::from_glsl(ShaderStage::Vertex, include_str!("procsky.vert"))),
-                fragment: Some(
-                    shaders.add(Shader::from_glsl(ShaderStage::Fragment, include_str!("procsky.frag"))),
-                ),
+                vertex: shaders.add(Shader::from_glsl(
+                    ShaderStage::Vertex,
+                    include_str!("procsky.vert"),
+                )),
+                fragment: Some(shaders.add(Shader::from_glsl(
+                    ShaderStage::Fragment,
+                    include_str!("procsky.frag"),
+                ))),
             },
             rasterization_state: Some(RasterizationStateDescriptor {
                 polygon_mode: PolygonMode::Fill,
                 front_face: FrontFace::Cw,
-                cull_mode: CullMode::Front,
+                cull_mode: CullMode::None,
                 depth_bias: 0,
                 depth_bias_slope_scale: 0.0,
                 depth_bias_clamp: 0.0,

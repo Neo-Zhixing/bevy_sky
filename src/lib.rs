@@ -1,12 +1,11 @@
-use bevy::prelude::*;
-
 use bevy::core::Byteable;
+use bevy::prelude::*;
 
 mod sky_node;
 
 #[repr(C)]
 #[derive(Debug)]
-struct Sky {
+pub struct Sky {
     primaries: Vec3,
     luminance: f32,
 
