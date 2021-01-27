@@ -35,23 +35,28 @@ struct Sky {
 impl Default for Sky {
     fn default() -> Self {
         Sky {
-            depolarization_factor: 0.095,
-            primaries: Vec3::new(0.0, 0.0, 0.0),
+            depolarization_factor: 0.035,
+            /// Peak wavelength for red, green and blue light.
+            /// 440mn, 550nm and 680nm are considered as the peaks for blue,
+            /// green and red light respectively.
+            primaries: Vec3::new(6.8e-7, 5.5e-7, 4.5e-7),
             luminance: 1.0,
-            mie_coefficient: 0.011475,
-            mie_directional_g: 0.814,
+            mie_coefficient: 0.005,
+            mie_directional_g: 0.8,
             mie_k_coefficient: Vec3::new(0.686, 0.678, 0.666),
-            mie_v: 3.979,
-            mie_zenith_length: 1000.0,
-            num_molecules: 2.54e+25,
-            rayleigh: 2.295,
-            rayleigh_zenith_length: 540.0,
-            sun_position: Default::default(),
-            sun_angular_diameter_degrees: 0.00639,
-            sun_intensity_factor: 1151.0,
-            sun_intensity_falloff_steepness: 1.22,
-            tonemap_weighting: 10.0,
-            turbidity: 2.5,
+            mie_v: 4.0,
+            mie_zenith_length: 1.25e3,
+            /// The molecular density at sea level
+            num_molecules: 2.542e25,
+            rayleigh: 1.0,
+            rayleigh_zenith_length: 8.4e3,
+            sun_position: Vec3::new(700000.0, 50000.0, 0.0),
+            sun_angular_diameter_degrees: 0.0093333,
+            sun_intensity_factor: 1000.0,
+            sun_intensity_falloff_steepness: 1.5,
+            tonemap_weighting: 9.50,
+            turbidity: 2.0,
+            /// The index of refraction of air
             refractive_index: 1.000262,
         }
     }
