@@ -6,14 +6,7 @@ use bevy::render::mesh::{INDEX_BUFFER_ASSET_INDEX, VERTEX_ATTRIBUTE_BUFFER_ID};
 use bevy::render::pass::{
     LoadOp, Operations, PassDescriptor, RenderPassColorAttachmentDescriptor, TextureAttachment,
 };
-use bevy::render::pipeline::{
-    BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendDescriptor,
-    BlendFactor, BlendOperation, ColorStateDescriptor, ColorWrite, CompareFunction, CullMode,
-    DepthStencilStateDescriptor, FrontFace, IndexFormat, InputStepMode, PipelineDescriptor,
-    PipelineLayout, PrimitiveTopology, RasterizationStateDescriptor, RenderPipeline,
-    StencilStateDescriptor, StencilStateFaceDescriptor, UniformProperty, VertexAttributeDescriptor,
-    VertexBufferDescriptor, VertexFormat,
-};
+use bevy::render::pipeline::{BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendDescriptor, BlendFactor, BlendOperation, ColorStateDescriptor, ColorWrite, CompareFunction, CullMode, DepthStencilStateDescriptor, FrontFace, IndexFormat, InputStepMode, PipelineDescriptor, PipelineLayout, PrimitiveTopology, RasterizationStateDescriptor, RenderPipeline, StencilStateDescriptor, StencilStateFaceDescriptor, UniformProperty, VertexAttributeDescriptor, VertexBufferDescriptor, VertexFormat, PolygonMode, PushConstantRange};
 use bevy::render::render_graph::{
     base, Node, RenderGraph, RenderResourcesNode, ResourceSlotInfo, ResourceSlots, SlotLabel,
     WindowSwapChainNode, WindowTextureNode,
@@ -25,6 +18,7 @@ use bevy::render::renderer::{
 };
 use bevy::render::shader::{ShaderStage, ShaderStages};
 use bevy::render::texture::TextureFormat;
+use crate::Sky;
 
 pub const SKY_PIPELINE_HANDLE: HandleUntyped =
     HandleUntyped::weak_from_u64(PipelineDescriptor::TYPE_UUID, 0x5188c0693b407dd8);
@@ -84,6 +78,7 @@ impl Node for SkyNode {
         let pipeline_descriptor: &PipelineDescriptor = pipelines.get(pipeline_handle).unwrap();
         let layout = pipeline_descriptor.get_layout().unwrap();
         let camera_bind_group_descriptor = layout.get_bind_group(0).unwrap();
+        let sky = resources.get::<Sky>().unwrap();
 
         let camera_binding =
             if let Some(camera_binding) = render_resource_bindings.get(self.camera_name.as_str()) {
@@ -134,7 +129,12 @@ impl Node for SkyNode {
                     None,
                 );
                 render_pass.set_vertex_buffer(0, vertex_buffer_id, 0);
-                render_pass.set_index_buffer(index_buffer_id, 0);
+                render_pass.set_index_buffer(index_buffer_id, 0, IndexFormat::Uint16);
+                render_pass.set_push_constants(
+                    BindingShaderStage::FRAGMENT,
+                    0,
+                    sky.as_bytes(),
+                );
                 render_pass.draw_indexed(0..14, 0, 0..1);
             },
         )
@@ -195,7 +195,7 @@ pub(crate) fn setup(
                         name: "Camera".to_string(),
                         index: 0,
                         bind_type: BindType::Uniform {
-                            dynamic: false,
+                            has_dynamic_offset: false,
                             property: UniformProperty::Struct(vec![
                                 UniformProperty::Mat4,
                                 UniformProperty::Mat4,
@@ -215,6 +215,12 @@ pub(crate) fn setup(
                         shader_location: 0,
                     }],
                 }],
+                push_constant_ranges: vec![
+                    PushConstantRange {
+                        stages: BindingShaderStage::FRAGMENT,
+                        range: 0..(std::mem::size_of::<Sky>() as u32)
+                    }
+                ]
             }),
             shader_stages: ShaderStages {
                 vertex: shaders.add(Shader::from_glsl(ShaderStage::Vertex, include_str!("procsky.vert"))),
@@ -223,6 +229,7 @@ pub(crate) fn setup(
                 ),
             },
             rasterization_state: Some(RasterizationStateDescriptor {
+                polygon_mode: PolygonMode::Fill,
                 front_face: FrontFace::Cw,
                 cull_mode: CullMode::Front,
                 depth_bias: 0,
@@ -246,7 +253,7 @@ pub(crate) fn setup(
                 write_mask: ColorWrite::ALL,
             }],
             depth_stencil_state: None,
-            index_format: IndexFormat::Uint16,
+            index_format: Some(IndexFormat::Uint16),
             sample_count: 1,
             sample_mask: !0,
             alpha_to_coverage_enabled: false,

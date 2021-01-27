@@ -15,3 +15,4 @@ bevy_fly_camera = "0.6"
 
 [patch.crates-io]
 bevy = { path = "../bevy" }
+bevy_fly_camera = { path = "../bevy_fly_camera" }
