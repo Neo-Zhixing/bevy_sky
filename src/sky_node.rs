@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::Sky;
-use bevy::core::AsBytes;
+use bevy::core::{AsBytes, Bytes};
 use bevy::reflect::TypeUuid;
 use bevy::render::mesh::{INDEX_BUFFER_ASSET_INDEX, VERTEX_ATTRIBUTE_BUFFER_ID};
 use bevy::render::pass::{
@@ -113,6 +113,10 @@ impl Node for SkyNode {
             .expect("SkyNode requires color attachment input!")
             .get_texture()
             .expect("SkyNode requires the input to be a texture!");
+
+
+        let mut buf: [u8; 128] = [0; 128];
+        sky.write_bytes(&mut buf);
         render_context.begin_pass(
             &PassDescriptor {
                 color_attachments: vec![RenderPassColorAttachmentDescriptor {
@@ -137,7 +141,7 @@ impl Node for SkyNode {
                 );
                 render_pass.set_vertex_buffer(0, vertex_buffer_id, 0);
                 render_pass.set_index_buffer(index_buffer_id, 0, IndexFormat::Uint16);
-                render_pass.set_push_constants(BindingShaderStage::FRAGMENT, 0, sky.as_bytes());
+                render_pass.set_push_constants(BindingShaderStage::FRAGMENT, 0, &buf);
                 render_pass.draw_indexed(0..14, 0, 0..1);
             },
         )
@@ -150,6 +154,7 @@ pub(crate) fn setup(
     mut pipelines: ResMut<Assets<PipelineDescriptor>>,
     mut shaders: ResMut<Assets<Shader>>,
     mut render_graph: ResMut<RenderGraph>,
+    sky: Res<Sky>,
     render_resource_context: Res<Box<dyn RenderResourceContext>>,
 ) {
     let indices: [u16; 14] = [3, 7, 1, 5, 4, 7, 6, 3, 2, 1, 0, 4, 2, 6];
@@ -220,7 +225,7 @@ pub(crate) fn setup(
                 }],
                 push_constant_ranges: vec![PushConstantRange {
                     stages: BindingShaderStage::FRAGMENT,
-                    range: 0..(std::mem::size_of::<Sky>() as u32),
+                    range: 0..sky.byte_len() as u32,
                 }],
             }),
             shader_stages: ShaderStages {

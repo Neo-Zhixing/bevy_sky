@@ -1,4 +1,5 @@
 #version 450
+// Based on https://www2.cs.duke.edu/courses/cps124/spring08/assign/07_papers/p91-preetham.pdf
 
 layout(location = 0) out vec4 o_Target;
 layout(location = 0) in vec3 vWorldPosition;
@@ -30,15 +31,14 @@ layout(push_constant) uniform Sky {
     float sunIntensityFalloffSteepness;
     float tonemapWeighting;
     float depolarizationFactor;
+
+    vec3 total_rayleigh_scattering_coefficients;
+    float _placeholder1;
+    vec3 total_mie_scattering_coefficients;
 };
 
 const float PI = 3.141592653589793238462643383279502884197169;
 const vec3 UP = vec3(0.0, 1.0, 0.0);
-
-vec3 totalRayleigh(vec3 lambda)
-{
-    return (8.0 * pow(PI, 3.0) * pow(pow(refractiveIndex, 2.0) - 1.0, 2.0) * (6.0 + 3.0 * depolarizationFactor)) / (3.0 * numMolecules * pow(lambda, vec3(4.0)) * (6.0 - 7.0 * depolarizationFactor));
-}
 
 vec3 totalMie(vec3 lambda, vec3 K, float T)
 {
@@ -79,12 +79,12 @@ void main()
 {
     vec3 normalized_dir = normalize(vWorldPosition); // vWorldPos - cameraPos
     // Rayleigh coefficient
-    float sunfade = 1.0 - clamp(1.0 - exp((sunPosition.y / 450000.0)), 0.0, 1.0);
-    float rayleighCoefficient = rayleigh - (1.0 * (1.0 - sunfade));
-    vec3 betaR = totalRayleigh(primaries) * rayleighCoefficient;
+    float sunfade = clamp(1.0 - exp(sunPosition.y / 450000.0), 0.0, 1.0);
+    float rayleighCoefficient = rayleigh - (sunfade);
+    vec3 betaR = total_rayleigh_scattering_coefficients * rayleighCoefficient;
 
     // Mie coefficient
-    vec3 betaM = totalMie(primaries, mieKCoefficient, turbidity) * mieCoefficient;
+    vec3 betaM = total_mie_scattering_coefficients;
 
     // Optical length, cutoff angle at 90 to avoid singularity
     float zenithAngle = acos(max(0.0, dot(UP, normalized_dir)));
@@ -109,6 +109,7 @@ void main()
     float sundisk = smoothstep(sunAngularDiameterCos, sunAngularDiameterCos + 0.00002, cosTheta);
     vec3 L0 = vec3(0.1) * Fex;
     L0 += sunE * 19000.0 * Fex * sundisk;
+
     vec3 texColor = Lin + L0;
     texColor *= 0.04;
     texColor += vec3(0.0, 0.001, 0.0025) * 0.3;
@@ -117,7 +118,7 @@ void main()
     vec3 whiteScale = 1.0 / Uncharted2Tonemap(vec3(tonemapWeighting));
     vec3 curr = Uncharted2Tonemap((log2(2.0 / pow(luminance, 4.0))) * texColor);
     vec3 color = curr * whiteScale;
-    vec3 retColor = pow(color, vec3(1.0 / (1.2 + (1.2 * sunfade))));
+    vec3 retColor = pow(color, vec3(1.0 / (1.2 + (1.2 * (1 - sunfade)))));
 
     o_Target = vec4(retColor, 1.0);
 }

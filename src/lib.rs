@@ -1,6 +1,5 @@
-use bevy::core::Byteable;
+use bevy::core::{Byteable, Bytes, AsBytes};
 use bevy::prelude::*;
-
 mod sky_node;
 
 #[repr(C)]
@@ -13,6 +12,7 @@ pub struct Sky {
     mie_coefficient: f32,
 
     mie_directional_g: f32,
+    /// Junge's exponent
     mie_v: f32,
     mie_zenith_length: f32,
     num_molecules: f32,
@@ -34,6 +34,8 @@ pub struct Sky {
 impl Default for Sky {
     fn default() -> Self {
         Sky {
+            /// Depolarization factor: The ratio of the internal electric field induced by the
+            /// charges on the surface of a dielectric when an external field is applied to the polarization of the dielectric.
             depolarization_factor: 0.035,
             /// Peak wavelength for red, green and blue light.
             /// 440mn, 550nm and 680nm are considered as the peaks for blue,
@@ -60,7 +62,46 @@ impl Default for Sky {
         }
     }
 }
-unsafe impl Byteable for Sky {}
+
+impl Sky {
+    /// A.3 Scattering Coefficients
+    fn total_rayleigh_scattering_coefficients(&self) -> Vec3 {
+        let n2_1: f32 = self.refractive_index * self.refractive_index - 1.0;
+        let n2_1_second: f32 = n2_1 * n2_1;
+        let lambda_fourth = self.primaries * self.primaries;
+        let lambda_fourth = lambda_fourth * lambda_fourth;
+        let pi_third = std::f32::consts::PI;
+        let pi_third = pi_third * pi_third * pi_third;
+        let a = (8.0 * pi_third * n2_1_second) * (6.0 + 3.0 * self.depolarization_factor);
+        let b = (3.0 * self.num_molecules * lambda_fourth) * (6.0 - 7.0 * self.depolarization_factor);
+        a / b
+    }
+    fn total_mie_scattering_coefficients(&self) -> Vec3 {
+        // concentration factor that varies with turbidity T
+        let c: f32 = 0.2 * self.turbidity * 10e-18;
+        0.434 * c * std::f32::consts::PI * (std::f32::consts::TAU / self.primaries).powf(self.mie_v - 2.0) * self.mie_k_coefficient * self.mie_coefficient
+    }
+    fn as_bytes(&self) -> &[u8] {
+        unsafe {
+            let ptr = self as *const Sky as *const u8;
+            let slice = std::slice::from_raw_parts(ptr, std::mem::size_of::<Sky>());
+            slice
+        }
+    }
+}
+impl Bytes for Sky {
+    fn write_bytes(&self, buffer: &mut [u8]) {
+        let sky_size = std::mem::size_of::<Sky>();
+        assert_eq!(self.byte_len(), buffer.len());
+        buffer[0..sky_size].copy_from_slice(self.as_bytes());
+        buffer[sky_size..(sky_size + std::mem::size_of::<[f32; 3]>())].copy_from_slice(self.total_rayleigh_scattering_coefficients().as_bytes());
+        buffer[(sky_size + std::mem::size_of::<[f32; 4]>())..(sky_size + std::mem::size_of::<[f32; 7]>())].copy_from_slice(self.total_mie_scattering_coefficients().as_bytes());
+    }
+
+    fn byte_len(&self) -> usize {
+        std::mem::size_of::<Sky>() + std::mem::size_of::<[f32; 8]>()
+    }
+}
 
 pub struct SkyPlugin;
 
