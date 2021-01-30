@@ -1,4 +1,4 @@
-use bevy::core::{Byteable, Bytes, AsBytes};
+use bevy::core::{AsBytes, Bytes};
 use bevy::prelude::*;
 mod sky_node;
 
@@ -73,13 +73,19 @@ impl Sky {
         let pi_third = std::f32::consts::PI;
         let pi_third = pi_third * pi_third * pi_third;
         let a = (8.0 * pi_third * n2_1_second) * (6.0 + 3.0 * self.depolarization_factor);
-        let b = (3.0 * self.num_molecules * lambda_fourth) * (6.0 - 7.0 * self.depolarization_factor);
+        let b =
+            (3.0 * self.num_molecules * lambda_fourth) * (6.0 - 7.0 * self.depolarization_factor);
         a / b
     }
     fn total_mie_scattering_coefficients(&self) -> Vec3 {
         // concentration factor that varies with turbidity T
         let c: f32 = 0.2 * self.turbidity * 10e-18;
-        0.434 * c * std::f32::consts::PI * (std::f32::consts::TAU / self.primaries).powf(self.mie_v - 2.0) * self.mie_k_coefficient * self.mie_coefficient
+        0.434
+            * c
+            * std::f32::consts::PI
+            * (std::f32::consts::TAU / self.primaries).powf(self.mie_v - 2.0)
+            * self.mie_k_coefficient
+            * self.mie_coefficient
     }
     fn as_bytes(&self) -> &[u8] {
         unsafe {
@@ -94,8 +100,11 @@ impl Bytes for Sky {
         let sky_size = std::mem::size_of::<Sky>();
         assert_eq!(self.byte_len(), buffer.len());
         buffer[0..sky_size].copy_from_slice(self.as_bytes());
-        buffer[sky_size..(sky_size + std::mem::size_of::<[f32; 3]>())].copy_from_slice(self.total_rayleigh_scattering_coefficients().as_bytes());
-        buffer[(sky_size + std::mem::size_of::<[f32; 4]>())..(sky_size + std::mem::size_of::<[f32; 7]>())].copy_from_slice(self.total_mie_scattering_coefficients().as_bytes());
+        buffer[sky_size..(sky_size + std::mem::size_of::<[f32; 3]>())]
+            .copy_from_slice(self.total_rayleigh_scattering_coefficients().as_bytes());
+        buffer[(sky_size + std::mem::size_of::<[f32; 4]>())
+            ..(sky_size + std::mem::size_of::<[f32; 7]>())]
+            .copy_from_slice(self.total_mie_scattering_coefficients().as_bytes());
     }
 
     fn byte_len(&self) -> usize {

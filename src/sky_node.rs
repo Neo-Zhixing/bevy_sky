@@ -8,22 +8,18 @@ use bevy::render::pass::{
     LoadOp, Operations, PassDescriptor, RenderPassColorAttachmentDescriptor, TextureAttachment,
 };
 use bevy::render::pipeline::{
-    BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendDescriptor,
-    BlendFactor, BlendOperation, ColorStateDescriptor, ColorWrite, CompareFunction, CullMode,
-    DepthStencilStateDescriptor, FrontFace, IndexFormat, InputStepMode, PipelineDescriptor,
-    PipelineLayout, PolygonMode, PrimitiveTopology, PushConstantRange,
-    RasterizationStateDescriptor, RenderPipeline, StencilStateDescriptor,
-    StencilStateFaceDescriptor, UniformProperty, VertexAttributeDescriptor, VertexBufferDescriptor,
-    VertexFormat,
+    BindGroupDescriptor, BindType, BindingDescriptor, BindingShaderStage, BlendFactor,
+    BlendOperation, BlendState, ColorTargetState, ColorWrite, CullMode, FrontFace, IndexFormat,
+    InputStepMode, MultisampleState, PipelineDescriptor, PipelineLayout, PolygonMode,
+    PrimitiveState, PrimitiveTopology, PushConstantRange, UniformProperty, VertexAttribute,
+    VertexBufferLayout, VertexFormat,
 };
 use bevy::render::render_graph::{
-    base, Node, RenderGraph, RenderResourcesNode, ResourceSlotInfo, ResourceSlots, SlotLabel,
-    WindowSwapChainNode, WindowTextureNode,
+    base, Node, RenderGraph, ResourceSlotInfo, ResourceSlots, SlotLabel, WindowSwapChainNode,
 };
 use bevy::render::renderer::{
-    BindGroup, BufferInfo, BufferUsage, RenderContext, RenderResource, RenderResourceBindings,
-    RenderResourceContext, RenderResourceId, RenderResourceIterator, RenderResourceType,
-    RenderResources,
+    BindGroup, BufferInfo, BufferUsage, RenderContext, RenderResourceBindings,
+    RenderResourceContext, RenderResourceId, RenderResourceType,
 };
 use bevy::render::shader::{ShaderStage, ShaderStages};
 use bevy::render::texture::TextureFormat;
@@ -113,7 +109,6 @@ impl Node for SkyNode {
             .expect("SkyNode requires color attachment input!")
             .get_texture()
             .expect("SkyNode requires the input to be a texture!");
-
 
         let mut buf: [u8; 128] = [0; 128];
         sky.write_bytes(&mut buf);
@@ -212,11 +207,11 @@ pub(crate) fn setup(
                         shader_stage: BindingShaderStage::VERTEX | BindingShaderStage::FRAGMENT,
                     }],
                 )],
-                vertex_buffer_descriptors: vec![VertexBufferDescriptor {
+                vertex_buffer_descriptors: vec![VertexBufferLayout {
                     name: "SkyboxCube".into(),
                     stride: std::mem::size_of::<[f32; 3]>() as u64,
                     step_mode: InputStepMode::Vertex,
-                    attributes: vec![VertexAttributeDescriptor {
+                    attributes: vec![VertexAttribute {
                         name: "Vertex_Position".into(),
                         offset: 0,
                         format: VertexFormat::Float3,
@@ -238,35 +233,34 @@ pub(crate) fn setup(
                     include_str!("procsky.frag"),
                 ))),
             },
-            rasterization_state: Some(RasterizationStateDescriptor {
-                polygon_mode: PolygonMode::Fill,
+            primitive: PrimitiveState {
+                topology: PrimitiveTopology::TriangleStrip,
+                strip_index_format: Some(IndexFormat::Uint16),
                 front_face: FrontFace::Cw,
                 cull_mode: CullMode::None,
-                depth_bias: 0,
-                depth_bias_slope_scale: 0.0,
-                depth_bias_clamp: 0.0,
-                clamp_depth: false,
-            }),
-            primitive_topology: PrimitiveTopology::TriangleStrip,
-            color_states: vec![ColorStateDescriptor {
+                polygon_mode: PolygonMode::Fill,
+            },
+            depth_stencil: None,
+            multisample: MultisampleState {
+                count: 1,
+                mask: !0,
+                alpha_to_coverage_enabled: false,
+            },
+            color_target_states: vec![ColorTargetState {
                 format: TextureFormat::default(),
-                color_blend: BlendDescriptor {
+                color_blend: BlendState {
                     src_factor: BlendFactor::SrcAlpha,
                     dst_factor: BlendFactor::OneMinusSrcAlpha,
                     operation: BlendOperation::Add,
                 },
-                alpha_blend: BlendDescriptor {
+                alpha_blend: BlendState {
                     src_factor: BlendFactor::One,
                     dst_factor: BlendFactor::One,
                     operation: BlendOperation::Add,
                 },
                 write_mask: ColorWrite::ALL,
             }],
-            depth_stencil_state: None,
             index_format: Some(IndexFormat::Uint16),
-            sample_count: 1,
-            sample_mask: !0,
-            alpha_to_coverage_enabled: false,
         },
     );
     let pipeline_handle: Handle<PipelineDescriptor> = SKY_PIPELINE_HANDLE.typed();
