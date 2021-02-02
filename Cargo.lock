@@ -232,7 +232,7 @@ checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 [[package]]
 name = "bevy"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_internal",
 ]
@@ -246,7 +246,7 @@ checksum = "0d5f2f58f0aec3c50a20799792c3705e80dd7df327e79791cacec197e84e5e61"
 [[package]]
 name = "bevy_app"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_derive",
  "bevy_ecs",
@@ -259,7 +259,7 @@ dependencies = [
 [[package]]
 name = "bevy_asset"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "anyhow",
  "bevy_app",
@@ -287,7 +287,7 @@ dependencies = [
 [[package]]
 name = "bevy_audio"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "anyhow",
  "bevy_app",
@@ -302,7 +302,7 @@ dependencies = [
 [[package]]
 name = "bevy_core"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_derive",
@@ -316,7 +316,7 @@ dependencies = [
 [[package]]
 name = "bevy_derive"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "Inflector",
  "find-crate",
@@ -328,7 +328,7 @@ dependencies = [
 [[package]]
 name = "bevy_diagnostic"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_core",
@@ -341,7 +341,7 @@ dependencies = [
 [[package]]
 name = "bevy_dynamic_plugin"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "libloading",
@@ -350,7 +350,7 @@ dependencies = [
 [[package]]
 name = "bevy_ecs"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_ecs_macros",
  "bevy_tasks",
@@ -369,7 +369,7 @@ dependencies = [
 [[package]]
 name = "bevy_ecs_macros"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "find-crate",
  "proc-macro2",
@@ -380,7 +380,7 @@ dependencies = [
 [[package]]
 name = "bevy_gilrs"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -392,7 +392,7 @@ dependencies = [
 [[package]]
 name = "bevy_gltf"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "anyhow",
  "base64",
@@ -414,7 +414,7 @@ dependencies = [
 [[package]]
 name = "bevy_input"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -425,7 +425,7 @@ dependencies = [
 [[package]]
 name = "bevy_internal"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -459,7 +459,7 @@ dependencies = [
 [[package]]
 name = "bevy_log"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "android_log-sys 0.2.0",
  "bevy_app",
@@ -472,7 +472,7 @@ dependencies = [
 [[package]]
 name = "bevy_math"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_reflect",
  "glam 0.12.0",
@@ -481,7 +481,7 @@ dependencies = [
 [[package]]
 name = "bevy_pbr"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -498,7 +498,7 @@ dependencies = [
 [[package]]
 name = "bevy_reflect"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -516,7 +516,7 @@ dependencies = [
 [[package]]
 name = "bevy_reflect_derive"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "find-crate",
  "proc-macro2",
@@ -528,7 +528,7 @@ dependencies = [
 [[package]]
 name = "bevy_render"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "anyhow",
  "bevy-glsl-to-spirv",
@@ -559,7 +559,7 @@ dependencies = [
 [[package]]
 name = "bevy_scene"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "anyhow",
  "bevy_app",
@@ -585,7 +585,7 @@ dependencies = [
 [[package]]
 name = "bevy_sprite"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -605,7 +605,7 @@ dependencies = [
 [[package]]
 name = "bevy_tasks"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "async-channel",
  "async-executor",
@@ -619,7 +619,7 @@ dependencies = [
 [[package]]
 name = "bevy_text"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -641,7 +641,7 @@ dependencies = [
 [[package]]
 name = "bevy_transform"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -654,7 +654,7 @@ dependencies = [
 [[package]]
 name = "bevy_ui"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -672,13 +672,14 @@ dependencies = [
  "bevy_utils",
  "bevy_window",
  "serde",
+ "smallvec",
  "stretch",
 ]
 
 [[package]]
 name = "bevy_utils"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "ahash 0.6.3",
  "getrandom",
@@ -690,7 +691,7 @@ dependencies = [
 [[package]]
 name = "bevy_wgpu"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -711,7 +712,7 @@ dependencies = [
 [[package]]
 name = "bevy_window"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -723,7 +724,7 @@ dependencies = [
 [[package]]
 name = "bevy_winit"
 version = "0.4.0"
-source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#537cb067bd7820577c8929e3e840cd2f9aa2f103"
+source = "git+https://github.com/Neo-Zhixing/bevy.git?branch=camera_transform_matrix#0fbb358bbf61d7bedebf678e738af4998eeca372"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1509,8 +1510,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-auxil"
-version = "0.5.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7b33ecf067f2117668d91c9b0f2e5f223ebd1ffec314caa2f3de27bb580186d"
 dependencies = [
  "fxhash",
  "gfx-hal",
@@ -1519,8 +1521,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-dx11"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f851d03c2e8f117e3702bf41201a4fafa447d5cb1276d5375870ae7573d069dd"
 dependencies = [
  "arrayvec",
  "bitflags",
@@ -1540,8 +1543,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-dx12"
-version = "0.6.2"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36dc6ba2b7647e2c2b27b8f74ff5ccdd53c703776588eee5b1de515fdcbd6bc9"
 dependencies = [
  "arrayvec",
  "bit-set",
@@ -1560,8 +1564,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-empty"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f07ef26a65954cfdd7b4c587f485100d1bb3b0bd6a51b02d817d6c87cca7a91"
 dependencies = [
  "gfx-hal",
  "log",
@@ -1570,8 +1575,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-gl"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e17fd85420547bceb851fadb90f196f168abfc252d57528bd2d749db0d18b75f"
 dependencies = [
  "arrayvec",
  "bitflags",
@@ -1592,8 +1598,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-metal"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8dc54b456ece69ef49f8893269ebf24ac70969ed34ba2719c3f3abcc8fbff14e"
 dependencies = [
  "arrayvec",
  "bitflags",
@@ -1616,8 +1623,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-backend-vulkan"
-version = "0.6.5"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dabe88b1a5c91e0f969b441cc57e70364858066e4ba937deeb62065654ef9bd9"
 dependencies = [
  "arrayvec",
  "ash",
@@ -1636,8 +1644,9 @@ dependencies = [
 
 [[package]]
 name = "gfx-hal"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1d9cc8d3b573dda62d0baca4f02e0209786e22c562caff001d77c389008781d"
 dependencies = [
  "bitflags",
  "naga",
@@ -2172,8 +2181,9 @@ checksum = "0ee1c47aaa256ecabcaea351eae4a9b01ef39ed810004e298d2511ed284b1525"
 
 [[package]]
 name = "metal"
-version = "0.20.1"
-source = "git+https://github.com/gfx-rs/metal-rs?rev=9a12f4e7e7030f41675d1b438c88f9dd75a994cd#9a12f4e7e7030f41675d1b438c88f9dd75a994cd"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4598d719460ade24c7d91f335daf055bf2a7eec030728ce751814c50cdd6a26c"
 dependencies = [
  "bitflags",
  "block",
@@ -2290,8 +2300,9 @@ dependencies = [
 
 [[package]]
 name = "naga"
-version = "0.2.0"
-source = "git+https://github.com/gfx-rs/naga?tag=gfx-8#4a13ce022b666a4896ba1dbcbd82121e8b06ad3e"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8f30d7036f137a2f64fd7d53b70a91545d3f09e030b77b3816ff7bd4cf3f789"
 dependencies = [
  "bit-set",
  "bitflags",
@@ -2750,8 +2761,9 @@ dependencies = [
 
 [[package]]
 name = "range-alloc"
-version = "0.1.1"
-source = "git+https://github.com/gfx-rs/gfx?rev=2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8#2fd74dbe1562a3eef05b11dcd300c1c9c9bc12a8"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "63e935c45e09cc6dcf00d2f0b2d630a58f4095320223d47fc68918722f0538b6"
 
 [[package]]
 name = "raw-window-handle"
@@ -2813,9 +2825,9 @@ checksum = "b5eb417147ba9860a96cfe72a0b93bf88fee1744b5636ec99ab20c1aa9376581"
 
 [[package]]
 name = "ring"
-version = "0.16.19"
+version = "0.16.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "024a1e66fea74c66c66624ee5622a7ff0e4b73a13b4f5c326ddb50c708944226"
+checksum = "3053cf52e236a3ed746dfc745aa9cacf1b791d846bdaf412f60a8d7d6e17c8fc"
 dependencies = [
  "cc",
  "libc",
@@ -3648,8 +3660,9 @@ dependencies = [
 
 [[package]]
 name = "wgpu"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/wgpu-rs?rev=f882abcf4b3d1e9bfbfc95b61874344661956479#f882abcf4b3d1e9bfbfc95b61874344661956479"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c60007fc3748278a36b458d96f86105f43aa5f0e412b15a5f934950d61ec26a9"
 dependencies = [
  "arrayvec",
  "js-sys",
@@ -3667,8 +3680,9 @@ dependencies = [
 
 [[package]]
 name = "wgpu-core"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/wgpu?rev=ac81f3e7562eff96ca854b462b0893c38ea98de2#ac81f3e7562eff96ca854b462b0893c38ea98de2"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d0b0acbc906c464cb75dac28062a8591ec9fe0ce61e271bb732c43196dc6aa1"
 dependencies = [
  "arrayvec",
  "bitflags",
@@ -3695,8 +3709,9 @@ dependencies = [
 
 [[package]]
 name = "wgpu-types"
-version = "0.6.0"
-source = "git+https://github.com/gfx-rs/wgpu?rev=ac81f3e7562eff96ca854b462b0893c38ea98de2#ac81f3e7562eff96ca854b462b0893c38ea98de2"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72fa9ba80626278fd87351555c363378d08122d7601e58319be3d6fa85a87747"
 dependencies = [
  "bitflags",
 ]
