@@ -260,7 +260,6 @@ pub(crate) fn setup(
                 },
                 write_mask: ColorWrite::ALL,
             }],
-            index_format: Some(IndexFormat::Uint16),
         },
     );
     let pipeline_handle: Handle<PipelineDescriptor> = SKY_PIPELINE_HANDLE.typed();
